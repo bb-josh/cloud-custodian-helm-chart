@@ -1,2 +1,7 @@
 .vscode/
 .idea/
+.DS_Store
+.nocommit
+.no_commit
+.secret
+.secrets
