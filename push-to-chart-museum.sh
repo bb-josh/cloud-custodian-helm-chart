@@ -103,8 +103,8 @@ function install_helm_plugin(){
 
 function push_chart(){
   local -r chartmuseum_url="${1}"
-  local -r helm_chart_dirname="${2}"
-  helm cm-push --force "${helm_chart_dirname}" "${chartmuseum_url}"
+  local -r helm_chart_dirpath="${2}"
+  helm cm-push --force "${helm_chart_dirpath}" "${chartmuseum_url}"
 }
 
 
@@ -112,14 +112,14 @@ function push_chart(){
 function main(){
             # prevent masking return values
            script_dirpath="$(get_script_dirpath)"; local -r script_dirpath
-  local -r helm_chart_dirname="${script_dirpath}/cloud-custodian-cron/"
+  local -r helm_chart_dirpath="${script_dirpath}/cloud-custodian-cron/"
   local -r helm_push_plugin_url='https://github.com/chartmuseum/helm-push.git'
   local -r helm_push_plugin_name='cm-push'
   local -r chartmuseum_url='https://charts.in.bbhosted.com'
 
   initialize          "${chartmuseum_url}"
   install_helm_plugin "${helm_push_plugin_url}" "${helm_push_plugin_name}"
-  push_chart          "${chartmuseum_url}" "${helm_chart_dirname}"
+  push_chart          "${chartmuseum_url}" "${helm_chart_dirpath}"
 
   exit 0
 }
